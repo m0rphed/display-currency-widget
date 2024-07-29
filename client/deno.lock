@@ -272,7 +272,8 @@
       "npm:tailwind-merge@2.4.0",
       "npm:tailwindcss-animate@1.0.7",
       "npm:tailwindcss@3.4.7",
-      "npm:vite@^5.3.5"
+      "npm:vite@^5.3.5",
+      "npm:zod@^3.23.8"
     ]
   }
 }
