@@ -1,3 +1,4 @@
+import CardRow from "./card-row.tsx";
 import {
   Card,
   CardContent,
@@ -14,7 +15,8 @@ const Converter = () => {
         <CardDescription>Card Description</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Card Content</p>
+        <CardRow />
+        <CardRow />
       </CardContent>
     </Card>
   );
