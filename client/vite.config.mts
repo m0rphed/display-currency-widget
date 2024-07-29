@@ -1,10 +1,20 @@
-import { defineConfig } from 'npm:vite@^5.2.10'
-import react from 'npm:@vitejs/plugin-react@^4.2.1'
+// - dependencies resolved via import map in deno.json
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import "react";
+import "react-dom";
 
-import 'npm:react@^18.2.0'
-import 'npm:react-dom@^18.2.0'
+// - to resolve path we should use Deno's path utils (from '@std/path')
+//  instead of NodeJS __dirname global variable
+import * as path from "jsr:@std/path";
+const dirname = path.dirname(path.fromFileUrl(import.meta.url));
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()]
-})
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(dirname, "./src"),
+    },
+  },
+});
