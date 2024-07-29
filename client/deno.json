@@ -1,8 +1,41 @@
 {
   "tasks": {
-    "dev": "deno run -A --node-modules-dir npm:vite",
-    "build": "deno run -A --node-modules-dir npm:vite build",
-    "preview": "deno run -A --node-modules-dir npm:vite preview",
-    "serve": "deno run --allow-net --allow-read https://deno.land/std@0.157.0/http/file_server.ts dist/"
+    "dev": "deno run -A --node-modules-dir npm:vite@5.3.5",
+    "build": "deno run -A --node-modules-dir npm:vite@5.3.5 build",
+    "preview": "deno run -A --node-modules-dir npm:vite@5.3.5 preview",
+    "serve": "deno run --allow-net --allow-read https://deno.land/std@0.224.0/http/file_server.ts dist/"
+  },
+  "nodeModulesDir": true,
+
+  "imports": {
+    "@/": "./src/",
+
+    "vite":                     "npm:vite@^5.3.5",
+    "@vitejs/plugin-react":     "npm:@vitejs/plugin-react@^4.3.1",
+
+    "postcss":                  "npm:postcss@8.4.40",
+    "autoprefixer":             "npm:autoprefixer@10.4.19",
+
+    "react":                    "npm:react@^18.3.1",
+    "react-dom":                "npm:react-dom@^18.3.1",
+
+    "tailwindcss":              "npm:tailwindcss@3.4.7",
+    "tailwindcss/":             "npm:/tailwindcss@3.4.7/",
+
+    "tailwindcss/plugin":       "npm:/tailwindcss@3.4.7/plugin.js",
+
+    "@tailwindcss/typography":  "npm:@tailwindcss/typography@0.5.13",
+    "tailwind-merge":           "npm:tailwind-merge@2.4.0",
+    "tailwindcss-animate":      "npm:tailwindcss-animate@1.0.7",
+    
+    "class-variance-authority": "npm:class-variance-authority@^0.7.0",
+    "clsx":                     "npm:clsx@^2.1.1",
+    "lucide-react":             "npm:lucide-react@^0.417.0",
+  },
+
+  "compilerOptions": {
+    "allowJs": true,
+    "types": ["node", "react"],
+    "lib": ["dom"]
   }
 }
