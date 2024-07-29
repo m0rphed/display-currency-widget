@@ -2,7 +2,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card.tsx";
@@ -10,7 +9,7 @@ import {
 const Converter = () => {
   return (
     <Card className="max-width-300px">
-      <CardHeader>
+      <CardHeader className="border-b-2 p-2 m-2">
         <CardTitle>Card Title</CardTitle>
         <CardDescription>Card Description</CardDescription>
       </CardHeader>
