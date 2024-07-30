@@ -44,6 +44,6 @@
   "compilerOptions": {
     "allowJs": true,
     "types": ["node", "react"],
-    "lib": ["dom"]
+    "lib": ["dom", "deno.ns"]
   }
 }

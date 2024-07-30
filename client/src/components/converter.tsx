@@ -7,6 +7,9 @@ import {
   CardTitle,
 } from "@/components/ui/card.tsx";
 
+import "jsr:@std/dotenv/load";
+const BASE_URL = Deno.env.get("VITE_BE_ENV");
+
 const Converter = () => {
   return (
     <Card className="max-width-300px">
