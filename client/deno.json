@@ -37,7 +37,8 @@
     "@hookform/resolvers":      "npm:@hookform/resolvers@^3.9.0",
     "@radix-ui/react-label":    "npm:@radix-ui/react-label@^2.1.0",
     "@radix-ui/react-select":   "npm:@radix-ui/react-select@^2.1.1",
-    "@radix-ui/react-slot":     "npm:@radix-ui/react-slot@^1.1.0"
+    "@radix-ui/react-slot":     "npm:@radix-ui/react-slot@^1.1.0",
+    "swr":                      "npm:swr@^2.2.5"
   },
 
   "compilerOptions": {
