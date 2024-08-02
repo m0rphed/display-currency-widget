@@ -9,7 +9,6 @@
 
   "imports": {
     "@/": "./src/",
-
     "vite":                     "npm:vite@^5.3.5",
     "@vitejs/plugin-react":     "npm:@vitejs/plugin-react@^4.3.1",
 
