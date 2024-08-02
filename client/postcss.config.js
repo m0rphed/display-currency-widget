@@ -5,4 +5,4 @@ export default {
   },
 };
 
-console.log("\n[DEBUG]: PostCSS says 'Hi!'\n");
+console.log("\n[DEBUG]: PostCSS says 'Hi!'");
