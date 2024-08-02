@@ -2,15 +2,13 @@
   "version": "3",
   "packages": {
     "specifiers": {
-      "jsr:@std/dotenv": "jsr:@std/dotenv@0.225.0",
       "jsr:@std/path": "jsr:@std/path@1.0.2",
       "npm:@hookform/resolvers@^3.9.0": "npm:@hookform/resolvers@3.9.0_react-hook-form@7.52.1__react@18.3.1_react@18.3.1",
       "npm:@radix-ui/react-label@^2.1.0": "npm:@radix-ui/react-label@2.1.0_react@18.3.1_react-dom@18.3.1__react@18.3.1",
       "npm:@radix-ui/react-select@^2.1.1": "npm:@radix-ui/react-select@2.1.1_react@18.3.1_react-dom@18.3.1__react@18.3.1",
       "npm:@radix-ui/react-slot@^1.1.0": "npm:@radix-ui/react-slot@1.1.0_react@18.3.1",
       "npm:@tailwindcss/typography@0.5.13": "npm:@tailwindcss/typography@0.5.13_tailwindcss@3.4.7__postcss@8.4.40",
-      "npm:@types/node": "npm:@types/node@18.16.19",
-      "npm:@vitejs/plugin-react@^4.3.1": "npm:@vitejs/plugin-react@4.3.1_vite@5.3.5__@types+node@18.16.19_@babel+core@7.24.9_@types+node@18.16.19",
+      "npm:@vitejs/plugin-react@^4.3.1": "npm:@vitejs/plugin-react@4.3.1_vite@5.3.5_@babel+core@7.24.9",
       "npm:autoprefixer@10.4.19": "npm:autoprefixer@10.4.19_postcss@8.4.40",
       "npm:class-variance-authority@^0.7.0": "npm:class-variance-authority@0.7.0",
       "npm:clsx@^2.1.1": "npm:clsx@2.1.1",
@@ -22,14 +20,11 @@
       "npm:tailwind-merge@2.4.0": "npm:tailwind-merge@2.4.0",
       "npm:tailwindcss-animate@1.0.7": "npm:tailwindcss-animate@1.0.7_tailwindcss@3.4.7__postcss@8.4.40",
       "npm:tailwindcss@3.4.7": "npm:tailwindcss@3.4.7_postcss@8.4.40",
-      "npm:vite@5.3.5": "npm:vite@5.3.5_@types+node@18.16.19",
-      "npm:vite@^5.3.5": "npm:vite@5.3.5_@types+node@18.16.19",
+      "npm:vite@5.3.5": "npm:vite@5.3.5",
+      "npm:vite@^5.3.5": "npm:vite@5.3.5",
       "npm:zod@^3.23.8": "npm:zod@3.23.8"
     },
     "jsr": {
-      "@std/dotenv@0.225.0": {
-        "integrity": "44db32932c67df82790a3e6847d7007befb6cc22d71f2f3ee7b7d00e1f0d6c94"
-      },
       "@std/path@1.0.2": {
         "integrity": "a452174603f8c620bd278a380c596437a9eef50c891c64b85812f735245d9ec7"
       }
@@ -703,11 +698,7 @@
         "integrity": "sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==",
         "dependencies": {}
       },
-      "@types/node@18.16.19": {
-        "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
-        "dependencies": {}
-      },
-      "@vitejs/plugin-react@4.3.1_vite@5.3.5__@types+node@18.16.19_@babel+core@7.24.9_@types+node@18.16.19": {
+      "@vitejs/plugin-react@4.3.1_vite@5.3.5_@babel+core@7.24.9": {
         "integrity": "sha512-m/V2syj5CuVnaxcUJOQRel/Wr31FFXRFlnOoq1TVtkCxsY5veGMTEmpWHndrhB2U8ScHtCQB1e+4hWYExQc6Lg==",
         "dependencies": {
           "@babel/core": "@babel/core@7.24.9",
@@ -715,7 +706,7 @@
           "@babel/plugin-transform-react-jsx-source": "@babel/plugin-transform-react-jsx-source@7.24.7_@babel+core@7.24.9",
           "@types/babel__core": "@types/babel__core@7.20.5",
           "react-refresh": "react-refresh@0.14.2",
-          "vite": "vite@5.3.5_@types+node@18.16.19"
+          "vite": "vite@5.3.5"
         }
       },
       "ansi-regex@5.0.1": {
@@ -1609,16 +1600,6 @@
           "rollup": "rollup@4.19.1"
         }
       },
-      "vite@5.3.5_@types+node@18.16.19": {
-        "integrity": "sha512-MdjglKR6AQXQb9JGiS7Rc2wC6uMjcm7Go/NHNO63EwiJXfuk9PgqiP/n5IDJCziMkfw9n4Ubp7lttNwz+8ZVKA==",
-        "dependencies": {
-          "@types/node": "@types/node@18.16.19",
-          "esbuild": "esbuild@0.21.5",
-          "fsevents": "fsevents@2.3.3",
-          "postcss": "postcss@8.4.40",
-          "rollup": "rollup@4.19.1"
-        }
-      },
       "which@2.0.2": {
         "integrity": "sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==",
         "dependencies": {
@@ -1672,6 +1653,7 @@
       "npm:react-dom@^18.3.1",
       "npm:react-hook-form@^7.52.1",
       "npm:react@^18.3.1",
+      "npm:swr@^2.2.5",
       "npm:tailwind-merge@2.4.0",
       "npm:tailwindcss-animate@1.0.7",
       "npm:tailwindcss@3.4.7",
