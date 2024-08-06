@@ -11,6 +11,7 @@ import useSWR from "swr";
 import LoaderComponent from "./loader-component.tsx";
 import ErrorComponent from "./error-component.tsx";
 import { useState } from "react";
+import modifyNames from "@/lib/utils/modifyNames.ts";
 
 // [WARNING] Deno v1.45.4
 // Because of current state of "Deno + Vite"
@@ -44,18 +45,22 @@ const Converter = () => {
     error: namesError,
     isLoading: isNamesLoading,
   } = useSWR(`${BASE_URL}/names`, (url) =>
-    fetch(url).then((res) => res.json())
+    fetch(url).then(async (res) => {
+      const data = await res.json();
+      // console.log(modifyNames(data), "modifyNames");
+      return modifyNames(data);
+    })
   );
 
   const {
     data: currenciesData,
     error: currenciesError,
     isLoading: isCurrenciesLoading,
-  } = useSWR(`${BASE_URL}/currencies`, (url) => {
-    fetch(url).then((res) => res.json());
-  });
+  } = useSWR(`${BASE_URL}/currencies`, (url) =>
+    fetch(url).then((res) => res.json())
+  );
 
-  console.log(currenciesData, namesData, "DATA");
+  // console.log(currenciesData, namesData, "DATA");
 
   if (isCurrenciesLoading || isNamesLoading) {
     return <LoaderComponent />;
