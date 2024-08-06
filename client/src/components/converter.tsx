@@ -73,6 +73,16 @@ const Converter = () => {
     }
   }, [namesData, currenciesData, sourceCurrency, targetCurrency]);
 
+  const handleChangeSourceAmount = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsForward(true);
+    setAmount(e.target.value);
+  };
+
+  const handleChangeTargetAmount = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsForward(false);
+    setAmount(e.target.value);
+  };
+
   if (isCurrenciesLoading || isNamesLoading) {
     return <LoaderComponent />;
   }
