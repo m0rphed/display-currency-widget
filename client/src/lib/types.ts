@@ -7,6 +7,6 @@ export interface ratesDataType {
 }
 
 export interface currencyNameType {
-  abw: string;
+  abv: string;
   name: string;
 }
