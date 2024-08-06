@@ -28,6 +28,17 @@ const Converter = () => {
   const [exchangeRate, setExchageRate] = useState<number>(1); // current exchange rates between 2 currencies
   const [amount, setAmount] = useState<string>("1");
 
+  let sourceAmount;
+  let targetAmount;
+
+  if (isForward) {
+    sourceAmount = amount;
+    targetAmount = (Number(amount) * exchangeRate).toFixed(2);
+  } else {
+    targetAmount = amount;
+    sourceAmount = (Number(amount) * exchangeRate).toFixed(2);
+  }
+
   const {
     data: namesData,
     error: namesError,
