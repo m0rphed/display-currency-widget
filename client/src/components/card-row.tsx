@@ -18,12 +18,27 @@ import {
   SelectValue,
 } from "@/components/ui/select.tsx";
 
+import { ChangeEvent } from "react";
+import { currencyNameType } from "@/lib/types.ts";
+
 const formSchema = z.object({
   amount: z.number().positive().multipleOf(0.01),
   currency: z.string(),
 });
 
-const CardRow = () => {
+const CardRow = ({
+  amount,
+  handleChangeAmount,
+  selectedCurrency,
+  handleChangeCurrency,
+  currencyNames,
+}: {
+  amount: string | undefined;
+  handleChangeAmount: (e: ChangeEvent<HTMLInputElement>) => void;
+  selectedCurrency: string | undefined;
+  handleChangeCurrency: (value: string) => void;
+  currencyNames: currencyNameType[] | undefined;
+}) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,10 +59,12 @@ const CardRow = () => {
                 <FormLabel>Amount</FormLabel>
                 <FormControl>
                   <Input
+                    {...field}
                     placeholder="0"
                     type="number"
                     pattern="[0-9]*"
-                    {...field}
+                    value={amount}
+                    onChange={handleChangeAmount}
                   />
                 </FormControl>
                 <FormMessage />
@@ -63,14 +80,21 @@ const CardRow = () => {
               <FormItem>
                 <FormLabel>Amount</FormLabel>
                 <FormControl>
-                  <Select {...field}>
+                  <Select
+                    {...field}
+                    value={selectedCurrency}
+                    onValueChange={handleChangeCurrency}
+                  >
                     <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Theme" />
+                      <SelectValue placeholder="Currency Name" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="light">Light</SelectItem>
-                      <SelectItem value="dark">Dark</SelectItem>
-                      <SelectItem value="system">System</SelectItem>
+                      {currencyNames?.map((item) => (
+                        <SelectItem key={item.abv} value={item.abv}>
+                          {" "}
+                          {item.name}{" "}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </FormControl>
