@@ -10,6 +10,7 @@ import CardRow from "./card-row.tsx";
 import useSWR from "swr";
 import LoaderComponent from "./loader-component.tsx";
 import ErrorComponent from "./error-component.tsx";
+import { useState } from "react";
 
 // [WARNING] Deno v1.45.4
 // Because of current state of "Deno + Vite"
@@ -21,6 +22,10 @@ const BASE_URL = import.meta.env.VITE_BE_URL;
 // console.log(`\n[DEBUG]: BASE_URL of backend is '${BASE_URL}'`);
 
 const Converter = () => {
+  const [isForward, setIsForward] = useState<boolean>(true);
+  const [sourceCurrency, setSourceCurrency] = useState<string | undefined>();
+  const [targetCurrency, setTargetCurrency] = useState<string | undefined>();
+
   const {
     data: namesData,
     error: namesError,
