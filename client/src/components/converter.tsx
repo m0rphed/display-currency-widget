@@ -8,6 +8,8 @@ import {
 
 import CardRow from "./card-row.tsx";
 import useSWR from "swr";
+import LoaderComponent from "./loader-component.tsx";
+import ErrorComponent from "./error-component.tsx";
 
 // [WARNING] Deno v1.45.4
 // Because of current state of "Deno + Vite"
@@ -16,15 +18,15 @@ import useSWR from "swr";
 // - which would be marked as error by Deno LSP,
 // because Deno by itself does not define `import.meta.env`
 const BASE_URL = import.meta.env.VITE_BE_URL;
-console.log(`\n[DEBUG]: BASE_URL of backend is '${BASE_URL}'`);
+// console.log(`\n[DEBUG]: BASE_URL of backend is '${BASE_URL}'`);
 
 const Converter = () => {
   const {
     data: namesData,
     error: namesError,
     isLoading: isNamesLoading,
-  } = useSWR(`${BASE_URL}/names`,
-    (url) => fetch(url).then((res) => res.json())
+  } = useSWR(`${BASE_URL}/names`, (url) =>
+    fetch(url).then((res) => res.json())
   );
 
   const {
@@ -36,6 +38,14 @@ const Converter = () => {
   });
 
   console.log(currenciesData, namesData, "DATA");
+
+  if (isCurrenciesLoading || isNamesLoading) {
+    return <LoaderComponent />;
+  }
+
+  if (currenciesError || namesError) {
+    return <ErrorComponent message="ErrorFetching data!" />;
+  }
 
   return (
     <Card className="max-width-300px">
