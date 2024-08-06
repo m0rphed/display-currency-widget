@@ -10,7 +10,7 @@ import CardRow from "./card-row.tsx";
 import useSWR from "swr";
 import LoaderComponent from "./loader-component.tsx";
 import ErrorComponent from "./error-component.tsx";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import modifyNames from "@/lib/utils/modifyNames.ts";
 import calculateExchangeRate from "@/lib/utils/calcRate.ts";
 
@@ -94,12 +94,28 @@ const Converter = () => {
   return (
     <Card className="max-width-300px">
       <CardHeader className="border-b-2 p-2 m-2">
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card Description</CardDescription>
+        <CardTitle>
+          {sourceAmount} {sourceCurrency}
+        </CardTitle>
+        <CardDescription>
+          {targetAmount} {targetCurrency}
+        </CardDescription>
       </CardHeader>
       <CardContent>
-        <CardRow />
-        <CardRow />
+        <CardRow
+          amount={sourceAmount}
+          handleChangeAmount={handleChangeSourceAmount}
+          selectedCurrency={sourceCurrency}
+          handleChangeCurrency={(value: string) => setSourceCurrency(value)}
+          currencyNames={namesData}
+        />
+        <CardRow
+          amount={targetAmount}
+          handleChangeAmount={handleChangeTargetAmount}
+          selectedCurrency={targetCurrency}
+          handleChangeCurrency={(value: string) => setTargetCurrency(value)}
+          currencyNames={namesData}
+        />
       </CardContent>
     </Card>
   );
