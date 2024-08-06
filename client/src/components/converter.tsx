@@ -10,8 +10,9 @@ import CardRow from "./card-row.tsx";
 import useSWR from "swr";
 import LoaderComponent from "./loader-component.tsx";
 import ErrorComponent from "./error-component.tsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import modifyNames from "@/lib/utils/modifyNames.ts";
+import calculateExchangeRate from "@/lib/utils/calcRate.ts";
 
 // [WARNING] Deno v1.45.4
 // Because of current state of "Deno + Vite"
@@ -26,7 +27,7 @@ const Converter = () => {
   const [isForward, setIsForward] = useState<boolean>(true);
   const [sourceCurrency, setSourceCurrency] = useState<string | undefined>();
   const [targetCurrency, setTargetCurrency] = useState<string | undefined>();
-  const [exchangeRate, setExchageRate] = useState<number>(1); // current exchange rates between 2 currencies
+  const [exchangeRate, setExchangeRate] = useState<number>(1); // current exchange rates between 2 currencies
   const [amount, setAmount] = useState<string>("1");
 
   let sourceAmount;
@@ -47,7 +48,6 @@ const Converter = () => {
   } = useSWR(`${BASE_URL}/names`, (url) =>
     fetch(url).then(async (res) => {
       const data = await res.json();
-      // console.log(modifyNames(data), "modifyNames");
       return modifyNames(data);
     })
   );
@@ -60,7 +60,18 @@ const Converter = () => {
     fetch(url).then((res) => res.json())
   );
 
-  // console.log(currenciesData, namesData, "DATA");
+  useEffect(() => {
+    if (namesData && currenciesData) {
+      !sourceCurrency && setSourceCurrency(namesData?.[0].abv);
+      !targetCurrency && setTargetCurrency(namesData?.[1].abv);
+      const calculatedRate = calculateExchangeRate(
+        sourceCurrency || namesData?.[0].abv,
+        targetCurrency || namesData?.[1].abv,
+        currenciesData
+      );
+      setExchangeRate(calculatedRate);
+    }
+  }, [namesData, currenciesData, sourceCurrency, targetCurrency]);
 
   if (isCurrenciesLoading || isNamesLoading) {
     return <LoaderComponent />;
