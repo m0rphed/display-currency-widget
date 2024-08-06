@@ -8,8 +8,8 @@ import {
 
 import CardRow from "./card-row.tsx";
 import useSWR from "swr";
-import LoaderComponent from "./loader-component.tsx";
-import ErrorComponent from "./error-component.tsx";
+import LoaderComponent from "@/components/loader-component.tsx";
+import ErrorComponent from "@/components/error-component.tsx";
 import { useState, useEffect, ChangeEvent } from "react";
 import modifyNames from "@/lib/utils/modifyNames.ts";
 import calculateExchangeRate from "@/lib/utils/calcRate.ts";
