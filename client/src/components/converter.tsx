@@ -25,7 +25,8 @@ const Converter = () => {
   const [isForward, setIsForward] = useState<boolean>(true);
   const [sourceCurrency, setSourceCurrency] = useState<string | undefined>();
   const [targetCurrency, setTargetCurrency] = useState<string | undefined>();
-  const [exchangeRate, setExchageRate] = useState<number>(1);
+  const [exchangeRate, setExchageRate] = useState<number>(1); // current exchange rates between 2 currencies
+  const [amount, setAmount] = useState<string>("1");
 
   const {
     data: namesData,
