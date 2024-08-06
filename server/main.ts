@@ -16,4 +16,4 @@ app.get("/names", (c) => {
   return c.redirect("/jsons/names.json");
 });
 
-Deno.serve(app.fetch);
+Deno.serve({ port: 8088 }, app.fetch);
