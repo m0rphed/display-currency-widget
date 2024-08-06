@@ -38,7 +38,7 @@ const Converter = () => {
     targetAmount = (Number(amount) * exchangeRate).toFixed(2);
   } else {
     targetAmount = amount;
-    sourceAmount = (Number(amount) * exchangeRate).toFixed(2);
+    sourceAmount = (Number(amount) / exchangeRate).toFixed(2);
   }
 
   const {
