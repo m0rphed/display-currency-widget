@@ -2,6 +2,12 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/deno";
 import { cache } from "hono/cache";
 import { cors } from "hono/cors";
+import "@std/dotenv/load";
+
+// main exchange rates provider: https://github.com/fawazahmed0/exchange-api
+// URL_MAIN: "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/"
+const URL_MAIN = Deno.env.get("EXCHANGE_RATES_API")
+const URL_FALLBACK = Deno.env.get("EXCHANGE_RATES_API_FALLBACK")
 
 // Default caching is 1 hour (= 3600 seconds)
 const CACHE_DURATION = 3600;
@@ -26,7 +32,7 @@ app.use(
 app.get("/currencies", async (c) => {
   try {
     const resp = await fetch(
-      `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${BASE_CURR}.json`
+      `${URL_MAIN}${BASE_CURR}.json`
     );
     if (resp.ok) {
       const data = await resp.json();
@@ -35,7 +41,7 @@ app.get("/currencies", async (c) => {
 
     // fallback API URL
     const fallbackApiResp = await fetch(
-      `https://latest.currency-api.pages.dev/v1/currencies/${BASE_CURR}.json`
+      `${URL_FALLBACK}${BASE_CURR}.json`
     );
     if (fallbackApiResp.ok) {
       const data = await fallbackApiResp.json();
