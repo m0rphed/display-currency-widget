@@ -3,7 +3,8 @@ import { serveStatic } from "hono/deno";
 import { cache } from "hono/cache";
 import { cors } from "hono/cors";
 
-const CACHE_DURATION_SECONDS = 3600; // cache for 1 hour (= 3600 seconds)
+// Default caching is 1 hour (= 3600 seconds)
+const CACHE_DURATION_SECONDS = 3600;
 
 const app = new Hono();
 app.use("/*", cors());
