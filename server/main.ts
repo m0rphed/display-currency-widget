@@ -6,8 +6,8 @@ import "@std/dotenv/load";
 
 // main exchange rates provider: https://github.com/fawazahmed0/exchange-api
 // URL_MAIN: "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/"
-const URL_MAIN = Deno.env.get("EXCHANGE_RATES_API")
-const URL_FALLBACK = Deno.env.get("EXCHANGE_RATES_API_FALLBACK")
+const URL_MAIN = Deno.env.get("EXCHANGE_RATES_API");
+const URL_FALLBACK = Deno.env.get("EXCHANGE_RATES_API_FALLBACK");
 
 // Default caching is 1 hour (= 3600 seconds)
 const CACHE_DURATION = 3600;
@@ -30,19 +30,15 @@ app.use(
 );
 
 app.get("/currencies", async (c) => {
-  try {
-    const resp = await fetch(
-      `${URL_MAIN}${BASE_CURR}.json`
-    );
+  try {    
+    const resp = await fetch(`${URL_MAIN}${BASE_CURR}.json`);
     if (resp.ok) {
       const data = await resp.json();
       return c.json(data);
     }
 
     // fallback API URL
-    const fallbackApiResp = await fetch(
-      `${URL_FALLBACK}${BASE_CURR}.json`
-    );
+    const fallbackApiResp = await fetch(`${URL_FALLBACK}${BASE_CURR}.json`);
     if (fallbackApiResp.ok) {
       const data = await fallbackApiResp.json();
       return c.json(data);
