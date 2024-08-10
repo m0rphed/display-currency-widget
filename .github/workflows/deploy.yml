@@ -1,9 +1,9 @@
 name: Deploy API with Deno Deploy
 on:
   push:
-    branches: dev
-  # pull_request:
-  #   branches: main
+    branches: ["dev"]
+  pull_request:
+    branches: ["main", "dev"]
 
 jobs:
   deploy:
@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      id-token: write # Needed for auth with Deno Deploy
-      contents: read # Needed to clone the repository
+      id-token: write   # -> Needed for auth with Deno Deploy
+      contents: read    # -> Needed to clone the repository
 
     steps:
       - name: Clone repository
@@ -23,16 +23,19 @@ jobs:
         with:
           deno-version: v1.x
 
-      # - name: Build step
-      #   run: "deno task build"
-
       - name: Upload API to Deno Deploy
         uses: denoland/deployctl@v1
+        env:
+          # Setting an environment variables
+          EXCHANGE_RATES_API: ${{ vars.EXCHANGE_RATES_API }}
+          EXCHANGE_RATES_API_FALLBACK: ${{ vars.EXCHANGE_RATES_API_FALLBACK }}
         with:
           project: "currency-exchange-rates"
-          entrypoint: "main.ts"
+          entrypoint: "app.ts"
           root: "server"
           include: |
-            main.ts
-            jsons
-          exclude: node_modules,.env
+            deno.json
+            app.ts
+            processData.ts
+            types.ts
+            jsons/

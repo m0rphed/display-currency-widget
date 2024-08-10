@@ -7,12 +7,12 @@ import { parseKnownCurrencies } from "./processData.ts";
 import { CurrencyApiResponse } from "./types.ts";
 
 // main exchange rates provider: https://github.com/fawazahmed0/exchange-api
-// URL_MAIN: "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/"
+// URL_MAIN: "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies"
 const URL_MAIN = Deno.env.get("EXCHANGE_RATES_API");
 const URL_FALLBACK = Deno.env.get("EXCHANGE_RATES_API_FALLBACK");
 
 // configure caching
-const CACHE_DURATION = 3600; 
+const CACHE_DURATION = 3600;
 // base currency is EURO by default
 const BASE_CURR = "eur";
 
@@ -42,18 +42,26 @@ app.use(
 
 app.get("/currencies", async (c) => {
   try {
-    const resp = await fetch(`${URL_MAIN}${BASE_CURR}.json`);
+    const resp = await fetch(`${URL_MAIN}/${BASE_CURR}.json`);
     if (resp.ok) {
       const data: CurrencyApiResponse = await resp.json();
-      const knownCurrencyRates = parseKnownCurrencies(BASE_CURR, data, supportedCurrencies);
+      const knownCurrencyRates = parseKnownCurrencies(
+        BASE_CURR,
+        data,
+        supportedCurrencies
+      );
       return c.json(knownCurrencyRates);
     }
 
     // fallback API URL
-    const fallbackApiResp = await fetch(`${URL_FALLBACK}${BASE_CURR}.json`);
+    const fallbackApiResp = await fetch(`${URL_FALLBACK}/${BASE_CURR}.json`);
     if (fallbackApiResp.ok) {
       const data: CurrencyApiResponse = await fallbackApiResp.json();
-      const processedData = parseKnownCurrencies(BASE_CURR, data, supportedCurrencies);
+      const processedData = parseKnownCurrencies(
+        BASE_CURR,
+        data,
+        supportedCurrencies
+      );
       return c.json(processedData);
     }
     // if both failed:
