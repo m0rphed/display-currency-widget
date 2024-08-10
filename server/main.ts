@@ -11,8 +11,9 @@ import { CurrencyApiResponse } from "./types.ts";
 const URL_MAIN = Deno.env.get("EXCHANGE_RATES_API");
 const URL_FALLBACK = Deno.env.get("EXCHANGE_RATES_API_FALLBACK");
 
-// Default caching is 1 hour (= 3600 seconds)
-const CACHE_DURATION = 3600;
+// configure caching
+const CACHE_DURATION = 3600; 
+// base currency is EURO by default
 const BASE_CURR = "eur";
 
 // Pre-load names for filtering
@@ -21,7 +22,7 @@ async function getSupportedCodes(path: string): Promise<Set<string>> {
   return new Set<string>(Object.keys(namesData));
 }
 
-const supported = await getSupportedCodes("./jsons/names.json");
+const supportedCurrencies = await getSupportedCodes("./jsons/names.json");
 
 const app = new Hono();
 app.use("/*", cors());
@@ -44,15 +45,15 @@ app.get("/currencies", async (c) => {
     const resp = await fetch(`${URL_MAIN}${BASE_CURR}.json`);
     if (resp.ok) {
       const data: CurrencyApiResponse = await resp.json();
-      const processedData = parseKnownCurrencies(BASE_CURR, data, supported);
-      return c.json(processedData);
+      const knownCurrencyRates = parseKnownCurrencies(BASE_CURR, data, supportedCurrencies);
+      return c.json(knownCurrencyRates);
     }
 
     // fallback API URL
     const fallbackApiResp = await fetch(`${URL_FALLBACK}${BASE_CURR}.json`);
     if (fallbackApiResp.ok) {
       const data: CurrencyApiResponse = await fallbackApiResp.json();
-      const processedData = parseKnownCurrencies(BASE_CURR, data, supported);
+      const processedData = parseKnownCurrencies(BASE_CURR, data, supportedCurrencies);
       return c.json(processedData);
     }
     // if both failed:
