@@ -11,8 +11,9 @@ import { CurrencyApiResponse } from "./types.ts";
 const URL_MAIN = Deno.env.get("EXCHANGE_RATES_API");
 const URL_FALLBACK = Deno.env.get("EXCHANGE_RATES_API_FALLBACK");
 
-// Default caching is 1 hour (= 3600 seconds)
-const CACHE_DURATION = 3600;
+// configure caching
+const CACHE_DURATION = 3600; 
+// base currency is EURO by default
 const BASE_CURR = "eur";
 
 // Pre-load names for filtering
