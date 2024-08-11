@@ -20,7 +20,7 @@ import calculateExchangeRate from "@/lib/utils/calcRate.ts";
 // instead of `Deno.env.get("VAR_NAME")`
 // - which would be marked as error by Deno LSP,
 // because Deno by itself does not define `import.meta.env`
-const BASE_URL = import.meta.env.VITE_BE_URL;
+const BASE_URL = import.meta.env.VITE_BE_URL || "https://currency-exchange-rates--dev.deno.dev";
 console.log(`\n[DEBUG]: BASE_URL of backend is '${BASE_URL}'`);
 
 const Converter = () => {
