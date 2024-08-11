@@ -88,7 +88,7 @@ const Converter = () => {
   }
 
   if (currenciesError || namesError) {
-    return <ErrorComponent message="ErrorFetching data!" />;
+    return <ErrorComponent message="Error fetching data!" />;
   }
 
   return (
