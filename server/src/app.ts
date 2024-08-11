@@ -28,7 +28,7 @@ const app = new Hono();
 app.use("/*", cors());
 
 // serve JSON folder with currency names
-app.use("/jsons/*", serveStatic({ root: "./" }));
+app.use("/src/jsons/*", serveStatic({ root: "./" }));
 
 // configure caching
 app.use(
@@ -68,12 +68,12 @@ app.get("/currencies", async (c) => {
     throw new Error("API response from `@fawazahmed0/currency-api` not OK");
   } catch (error) {
     console.log("[ERROR]", error);
-    return c.redirect("/jsons/currencies.json");
+    return c.redirect("/src/jsons/currencies.json");
   }
 });
 
 app.get("/names", (c) => {
-  return c.redirect("/jsons/names.json");
+  return c.redirect("/src/jsons/names.json");
 });
 
 Deno.serve({ port: 8088 }, app.fetch);
