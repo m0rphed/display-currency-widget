@@ -11,3 +11,5 @@ Foreign currency converter implemented using modified [`shadcn/ui` card componen
   - 👉 see [server 📁](server/README.md)
 
 This is an attempt to use [Deno](https://deno.com/) runtime both for building Backend & Frontend apps.
+
+Deployment to "Deno Deploy" service is automated via GitHub Action - see: `.github/workflows/deploy.yml`
