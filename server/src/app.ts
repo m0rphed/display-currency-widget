@@ -22,7 +22,7 @@ async function getSupportedCodes(path: string): Promise<Set<string>> {
   return new Set<string>(Object.keys(namesData));
 }
 
-const supportedCurrencies = await getSupportedCodes("./jsons/names.json");
+const supportedCurrencies = await getSupportedCodes("./src/jsons/names.json");
 
 const app = new Hono();
 app.use("/*", cors());

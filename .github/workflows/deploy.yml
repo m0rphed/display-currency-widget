@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      id-token: write   # -> Needed for auth with Deno Deploy
-      contents: read    # -> Needed to clone the repository
+      id-token: write # -> Needed for auth with Deno Deploy
+      contents: read # -> Needed to clone the repository
 
     steps:
       - name: Clone repository
@@ -26,19 +26,16 @@ jobs:
       - name: Upload API to Deno Deploy
         uses: denoland/deployctl@v1
         env:
-          # Setting an environment variables
+          # Setting environment variables
           EXCHANGE_RATES_API: ${{ vars.EXCHANGE_RATES_API }}
           EXCHANGE_RATES_API_FALLBACK: ${{ vars.EXCHANGE_RATES_API_FALLBACK }}
         with:
           project: "currency-exchange-rates"
-          entrypoint: "app.ts"
+          entrypoint: "src/app.ts"
           root: "server"
           include: |
             deno.json
-            app.ts
-            processData.ts
-            types.ts
-            jsons/
+            src/
 
       - name: Build step for Vite + Deno WebApp
         run: "cd ./client ; deno task build"
