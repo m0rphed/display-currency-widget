@@ -1,12 +1,20 @@
 {
   "imports": {
-    "hono": "jsr:@hono/hono@^4.5.2"
+    "hono": "jsr:@hono/hono@^4.5.2",
+    "@std/dotenv/load": "jsr:@std/dotenv/load"
   },
   "tasks": {
-    "start": "deno run --allow-net main.ts"
+    "start": "deno run --allow-net --allow-read --allow-env ./src/app.ts"
   },
   "compilerOptions": {
     "jsx": "precompile",
     "jsxImportSource": "hono/jsx"
+  },"deploy": {
+    "exclude": [".env"],
+    "include": [
+      "src",
+      "deno.json"
+    ],
+    "entrypoint": "./src/app.ts"
   }
 }

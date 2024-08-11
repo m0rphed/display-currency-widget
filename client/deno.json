@@ -1,0 +1,48 @@
+{
+  "tasks": {
+    "dev": "deno run -A --node-modules-dir npm:vite@5.3.5",
+    "build": "deno run -A --node-modules-dir npm:vite@5.3.5 build",
+    "preview": "deno run -A --node-modules-dir npm:vite@5.3.5 preview",
+    "serve": "deno run --allow-net --allow-read https://deno.land/std@0.217.0/http/file_server.ts dist/"
+  },
+  "nodeModulesDir": true,
+
+  "imports": {
+    "@/": "./src/",
+    "vite":                     "npm:vite@^5.3.5",
+    "@vitejs/plugin-react":     "npm:@vitejs/plugin-react@^4.3.1",
+
+    "postcss":                  "npm:postcss@8.4.40",
+    "autoprefixer":             "npm:autoprefixer@10.4.19",
+
+    "react":                    "npm:react@^18.3.1",
+    "react-dom":                "npm:react-dom@^18.3.1",
+
+    "tailwindcss":              "npm:tailwindcss@3.4.7",
+    "tailwindcss/":             "npm:/tailwindcss@3.4.7/",
+
+    "tailwindcss/plugin":       "npm:/tailwindcss@3.4.7/plugin.js",
+
+    "@tailwindcss/typography":  "npm:@tailwindcss/typography@0.5.13",
+    "tailwind-merge":           "npm:tailwind-merge@2.4.0",
+    "tailwindcss-animate":      "npm:tailwindcss-animate@1.0.7",
+    
+    "class-variance-authority": "npm:class-variance-authority@^0.7.0",
+    "clsx":                     "npm:clsx@^2.1.1",
+    "lucide-react":             "npm:lucide-react@^0.417.0",
+    
+    "zod":                      "npm:zod@^3.23.8",    
+    "react-hook-form":          "npm:react-hook-form@^7.52.1",
+    "@hookform/resolvers":      "npm:@hookform/resolvers@^3.9.0",
+    "@radix-ui/react-label":    "npm:@radix-ui/react-label@^2.1.0",
+    "@radix-ui/react-select":   "npm:@radix-ui/react-select@^2.1.1",
+    "@radix-ui/react-slot":     "npm:@radix-ui/react-slot@^1.1.0",
+    "swr":                      "npm:swr@^2.2.5"
+  },
+
+  "compilerOptions": {
+    "allowJs": true,
+    "types": ["node", "react"],
+    "lib": ["dom", "deno.ns"]
+  }
+}

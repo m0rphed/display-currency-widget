@@ -1,0 +1,50 @@
+name: Deploy API with Deno Deploy
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main", "dev"]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write # -> Needed for auth with Deno Deploy
+      contents: read # -> Needed to clone the repository
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Upload API to Deno Deploy
+        uses: denoland/deployctl@v1
+        env:
+          # Setting environment variables
+          EXCHANGE_RATES_API: ${{ vars.EXCHANGE_RATES_API }}
+          EXCHANGE_RATES_API_FALLBACK: ${{ vars.EXCHANGE_RATES_API_FALLBACK }}
+        with:
+          project: "currency-exchange-rates"
+          entrypoint: "src/app.ts"
+          root: "server"
+          include: |
+            deno.json
+            src/
+
+      - name: Build step for Vite + Deno WebApp
+        run: "cd ./client ; deno task build"
+
+      - name: Upload Vite + Deno WebApp to Deno Deploy
+        uses: denoland/deployctl@v1
+        env:
+          VITE_BE_URL: ${{ vars.VITE_BE_URL }}
+        with:
+          project: "currency-conv-widget"
+          entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
+          root: "client/dist"
